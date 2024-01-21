@@ -5,7 +5,7 @@
       "cache": false
     },
     "build": {
-      "outputs": ["dist/**"],
+      "outputs": ["dist/**", "build/**"],
       "dependsOn": ["^build"]
     },
     "type-check": {}
