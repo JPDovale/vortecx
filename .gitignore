@@ -134,3 +134,4 @@ bun.*
 .turbo
 rubyk.ts
 **/build/**/*
+./src

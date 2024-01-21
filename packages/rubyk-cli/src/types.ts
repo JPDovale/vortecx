@@ -1,7 +1,6 @@
 
 
 // export types
-export {ConfigFactory} from './ConfigFactory'
 
 export type TypeConfig = {
   name: string

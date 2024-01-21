@@ -19,9 +19,15 @@ module.exports = (toolbox: GluegunToolbox) => {
       process.exit(1)
     }
 
+    const cf = (await filesystem.readAsync(configPath)).split('=')[1]
+    const cfjs = `module.exports = ${cf}`
+
+    const filePath = filesystem.path(filesystem.cwd(), 'node_modules', '@rubykgen', 'rubyk-cli', '.rubyk', 'rubyk.js')
+    await filesystem.writeAsync(filePath, cfjs)
     
-    const ConfigFile = await import(configPath)
-    const configFile = ConfigFile.default() as ConfigType 
+    const ConfigFile = await import(filePath)
+    
+    const configFile = ConfigFile.default as ConfigType 
         
     const seenType = new Set()
     const duplicatedGenerators = []
