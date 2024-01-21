@@ -133,3 +133,4 @@ dist
 bun.*
 .turbo
 rubyk.ts
+**/build/**/*
