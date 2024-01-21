@@ -20,7 +20,7 @@ module.exports = (toolbox: GluegunToolbox) => {
     }
 
     
-    const configFile = await import(configPath) as { config: ConfigType }
+    const configFile = await require(configPath) as { config: ConfigType }
     
     const seenType = new Set()
     const duplicatedGenerators = []

@@ -132,3 +132,4 @@ dist
 # bun
 bun.*
 .turbo
+rubyk.ts
