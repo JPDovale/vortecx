@@ -20,12 +20,15 @@ module.exports = (toolbox: GluegunToolbox) => {
     }
 
     
-    const configFile = await require(configPath) as { config: ConfigType }
+    const ConfigFile = await require(configPath)
+    const configFile = ConfigFile() as ConfigType 
+        
+    console.log(configFile);
     
     const seenType = new Set()
     const duplicatedGenerators = []
 
-    for(const generator of configFile.config.generators) {
+    for(const generator of configFile.generators) {
       if(seenType.has(generator.type)) {
         duplicatedGenerators.push(generator)
         continue
@@ -39,7 +42,7 @@ module.exports = (toolbox: GluegunToolbox) => {
       process.exit(1)
     }
 
-    const config = Config.create(configFile.config, { module: moduleName, file: fileName, type: 'unknown' })
+    const config = Config.create(configFile, { module: moduleName, file: fileName, type: 'unknown' })
 
     return config
   }
