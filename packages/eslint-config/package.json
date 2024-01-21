@@ -5,6 +5,11 @@
     "./node/index.js",
     "./react/index.js"
   ],
+  "files": [
+    "./node/index.js",
+    "./react/index.js"
+  ],
+  "main": "./index.js",
   "license": "ISC",
   "dependencies": {
     "@rocketseat/eslint-config": "^2.1.0"
