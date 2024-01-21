@@ -1,6 +1,6 @@
 {
   "name": "@rubykgen/eslint-config",
-  "version": "0.0.01",
+  "version": "0.0.2",
   "exports": [
     "./node/index.js",
     "./react/index.js"
