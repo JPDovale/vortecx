@@ -1,5 +1,11 @@
 # @rubykgen/rubyk-cli
 
+## 0.1.0
+
+### Minor Changes
+
+- Fix some errors when replace patterns
+
 ## 0.0.7
 
 ### Patch Changes

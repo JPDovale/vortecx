@@ -1,6 +1,6 @@
 {
   "name": "@rubykgen/rubyk-cli",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "",
   "types": "build/types/types.d.ts",
   "bin": {
