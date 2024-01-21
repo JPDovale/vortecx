@@ -34,7 +34,6 @@ export class <%= props.name %> <%
   if(implementss.length > 0) { %>implements <%- implementss.map(makeGeneric).join(' ,') %> <%}
 %>{
   constructor() {}
-
   <% methods.forEach(mth => {
     let annotation = ''
     let method = ''
