@@ -135,3 +135,4 @@ bun.*
 rubyk.ts
 **/build/**/*
 ./src
+**/.rubyk/rubik.js

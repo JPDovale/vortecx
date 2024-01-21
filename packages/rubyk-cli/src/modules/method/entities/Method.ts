@@ -45,16 +45,18 @@ export class Method extends Entity<MethodProps> {
   }
 
   get annotations() {
-    return this.props.annotations
+    return this.props.annotations.map(a => PatterFactory.create(a, this.props))
   }
 
   get properties() {
-    return this.props.properties
+    return this.props.properties.map(p => ({
+      annotation: PatterFactory.create(p.annotation, this.props),
+      name: PatterFactory.create(p.name, this.props),
+      type: p.type
+    }))
   }
 
   get returns() {
     return this.props.returns
   }
-
-
 }
