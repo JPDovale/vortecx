@@ -1,5 +1,11 @@
 # @rubykgen/rubyk-cli
 
+## 0.0.5
+
+### Patch Changes
+
+- fix import type of config file
+
 ## 0.0.4
 
 ### Patch Changes
