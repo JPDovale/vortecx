@@ -1,0 +1,3 @@
+{
+  "extends": ["@rubykgen/eslint-config/node"]
+}

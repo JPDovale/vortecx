@@ -1,0 +1,13 @@
+{
+  "name": "@rubykgen/eslint-config",
+  "version": "0.0.1",
+  "exports": [
+    "./node/index.js",
+    "./react/index.js"
+  ],
+  "private": true,
+  "license": "ISC",
+  "dependencies": {
+    "@rocketseat/eslint-config": "^2.1.0"
+  }
+}

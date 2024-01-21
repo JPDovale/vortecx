@@ -1,0 +1,1 @@
+{"version":3,"file":"UniqueId.d.ts","sourceRoot":"","sources":["../../../../../src/shared/core/valueObjects/UniqueId.ts"],"names":[],"mappings":"AAEA,qBAAa,QAAQ;IACnB,OAAO,CAAC,MAAM,CAAQ;IAEtB,SAAS,aAAa,KAAK,EAAE,MAAM;IAInC,MAAM,CAAC,QAAQ;IAKf,MAAM,CAAC,YAAY,CAAC,KAAK,EAAE,MAAM;IAIjC,IAAI,KAAK,WAER;IAED,QAAQ;IAIR,MAAM,CAAC,KAAK,EAAE,QAAQ;CAIvB"}
