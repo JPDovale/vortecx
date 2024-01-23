@@ -1,5 +1,11 @@
 # @rubykgen/rubyk-cli
 
+## 0.1.1
+
+### Patch Changes
+
+- Add documentation
+
 ## 0.1.0
 
 ### Minor Changes
