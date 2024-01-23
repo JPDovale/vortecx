@@ -19,24 +19,6 @@ module.exports = (toolbox: GluegunToolbox) => {
     const ConfigFile = await import(fp)
     const configFile = ConfigFile.default as ConfigType 
 
-    const defaultPlugins = {
-      infraGenerators,
-      nestGenerators,
-      prismaGenerators
-    }
-
-    if(configFile.plugins && configFile.plugins.length > 0) {
-      for(const plugin of configFile.plugins) {
-        if(!configFile.generators) {
-          configFile.generators = []
-        }
-
-        if(!/^rubyk-\*\-plugin$/.test(plugin) && defaultPlugins[plugin]) {
-          configFile.generators.push(...defaultPlugins[plugin]())
-        }
-      }
-    }
-
     if(configFile.generators.length === 0) {
       error('No generators found')
       process.exit(1)
@@ -86,6 +68,29 @@ module.exports = (toolbox: GluegunToolbox) => {
 
     const filePath = filesystem.path(filesystem.cwd(), 'node_modules', '@rubykgen', 'rubyk-cli', '.rubyk', 'rubyk.js')
     await filesystem.writeAsync(filePath, cfjs)
+
+    const defaultPlugins = {
+      infraGenerators,
+      nestGenerators,
+      prismaGenerators
+    }
+
+    const ConfigFile = await import(filePath)
+    const configFile = ConfigFile.default as ConfigType 
+
+    if(configFile.plugins && configFile.plugins.length > 0) {
+      for(const plugin of configFile.plugins) {
+        if(!configFile.generators) {
+          configFile.generators = []
+        }
+
+        if(!/^rubyk-\*\-plugin$/.test(plugin) && defaultPlugins[plugin]) {
+          configFile.generators.push(...defaultPlugins[plugin]())
+        }
+      }
+    }
+
+    await filesystem.writeAsync(filePath, `module.exports = ${JSON.stringify(configFile, null, 2)}`)
     
     return filePath
   }
