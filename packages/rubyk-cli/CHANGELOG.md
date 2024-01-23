@@ -1,5 +1,11 @@
 # @rubykgen/rubyk-cli
 
+## 1.0.0
+
+### Major Changes
+
+- Add some features
+
 ## 0.1.1
 
 ### Patch Changes
