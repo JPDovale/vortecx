@@ -10,6 +10,7 @@ export interface ImportProps {
   type: string
   file: string
   name: string
+  pluralModule: string
 }
 
 export class Import extends Entity<ImportProps> {
@@ -20,7 +21,8 @@ export class Import extends Entity<ImportProps> {
       file: options.file,
       module: options.module,
       type: options.type,
-      name: ''
+      name: '',
+      pluralModule: options.pluralModule
     })
   }
 

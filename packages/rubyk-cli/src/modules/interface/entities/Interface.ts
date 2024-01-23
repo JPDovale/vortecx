@@ -13,6 +13,8 @@ export interface InterfaceProps {
   module: string
   file: string
   type: string
+  pluralModule: string
+
 }
 
 export class Interface extends Entity<InterfaceProps> {
@@ -24,7 +26,8 @@ export class Interface extends Entity<InterfaceProps> {
       export: props.export ?? false,
       file: options.file,
       module: options.module,
-      type: options.type
+      type: options.type,
+      pluralModule: options.pluralModule
     })
   }
 

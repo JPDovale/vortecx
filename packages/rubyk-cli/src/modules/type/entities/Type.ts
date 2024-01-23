@@ -13,6 +13,7 @@ export interface TypeProps {
   module: string
   file: string
   type: string
+  pluralModule: string
 }
 
 export class Type extends Entity<TypeProps> {
@@ -24,7 +25,8 @@ export class Type extends Entity<TypeProps> {
       receive: props.receive?.map((generic) => GenericType.create(generic, options)) ?? [],
       file: options.file,
       module: options.module,
-      type: options.type
+      type: options.type,
+      pluralModule: options.pluralModule
     })
   }
 

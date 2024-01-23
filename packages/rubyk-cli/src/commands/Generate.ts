@@ -6,12 +6,13 @@ module.exports = {
   alias: ['gen', 'g'],
   run: async (toolbox: GluegunToolbox) => {
     const { 
-      readConfigFile, 
+      makeConfig, 
       readModuleName,
       readFileName,
+      readPluralModuleName,
       generateFile,
       parameters ,
-      print: { error, success, info }
+      print: { error, success }
     } = toolbox
 
     if(!parameters.first) {
@@ -19,12 +20,10 @@ module.exports = {
       process.exit(1)
     }
 
-    info('Reading module...')
     const moduleName = await readModuleName()
-    info('Getting filename...')
+    const pluralModuleName = await readPluralModuleName()
     const fileName = await readFileName()
-    info('Reading your configurations file...')
-    const config = await readConfigFile(moduleName, fileName) as Config
+    const config = await makeConfig(moduleName, pluralModuleName, fileName) as Config
    
     await generateFile(config, parameters.first)
 

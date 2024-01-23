@@ -57,5 +57,7 @@ export type GeneratorConfig = {
 }
 
 export type Config = {
-  generators: GeneratorConfig[]
+  generators?: GeneratorConfig[]
+  modules?: ([string, string] | string)[]
+  plugins?: string[]
 }

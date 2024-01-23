@@ -1,5 +1,6 @@
 import { build } from 'gluegun'
-
+import  rubyk from './commands/Rubyk'
+import { Command } from 'gluegun/build/types/domain/command'
 
 async function run(argv) {
   const cli = build()
@@ -13,6 +14,8 @@ async function run(argv) {
     .version()
     .create()
 
+    
+  cli.defaultCommand = rubyk as Command
   const toolbox = await cli.run(argv)
 
   return toolbox

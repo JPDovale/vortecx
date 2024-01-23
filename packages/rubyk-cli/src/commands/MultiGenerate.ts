@@ -6,24 +6,23 @@ module.exports = {
   alias: ['mgen', 'mg'],
   run: async (toolbox: GluegunToolbox) => {
     const { 
-      readConfigFile, 
+      makeConfig, 
       readModuleName,
       readFileName,
+      readPluralModuleName,
       generateFile,
       parameters ,
-      print: { error, success, info }
+      print: { error, success }
     } = toolbox
 
-    info('Reading module...')
     const moduleName = await readModuleName()
+    const pluralModuleName = await readPluralModuleName()
 
-    info('Getting filename...')
+
     const fileName = await readFileName()
 
-    info('Reading your configurations file...')
-    const config = await readConfigFile(moduleName, fileName) as Config
+    const config = await makeConfig(moduleName, pluralModuleName, fileName) as Config
 
-    info('Finding generators...')
     const _generatorsName = parameters.options['g'] ?? parameters.options['generators']
     if(!_generatorsName) {
       error('Generators name is missing! Please specify it with --g or --generators')

@@ -10,6 +10,8 @@ export interface GenericTypeProps {
   module: string
   file: string
   type: string
+  pluralModule: string
+
 }
 
 export class GenericType extends Entity<GenericTypeProps> {
@@ -19,7 +21,8 @@ export class GenericType extends Entity<GenericTypeProps> {
       name: props.name,
       file: options.file,
       module: options.module,
-      type: options.type
+      type: options.type,
+      pluralModule: options.pluralModule
     })
   }
 

@@ -25,6 +25,7 @@ export interface GeneratorProps {
   interfaces: Interface[]
   types: Type[]
   test: 'unit' | 'integration' | 'e2e' | 'disabled'
+  pluralModule: string
 }
 
 export class Generator extends Entity<GeneratorProps> {
@@ -62,7 +63,8 @@ export class Generator extends Entity<GeneratorProps> {
       file: options.file,
       filename: config.filename ?? '-{file}-',
       test: config.test ?? 'unit',
-      alias: config.alias ?? null
+      alias: config.alias ?? null,
+      pluralModule: options.pluralModule
     })
   }
 

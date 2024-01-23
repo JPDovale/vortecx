@@ -19,6 +19,7 @@ export interface MethodProps {
   module: string
   file: string
   type: string
+  pluralModule: string
 }
 
 export class Method extends Entity<MethodProps> {
@@ -36,7 +37,8 @@ export class Method extends Entity<MethodProps> {
       },
       module: options.module,
       file: options.file,
-      type: options.type
+      type: options.type,
+      pluralModule: options.pluralModule
     })
   }
 

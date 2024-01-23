@@ -1,7 +1,7 @@
 import { GluegunToolbox } from "gluegun";
 
 module.exports = (toolbox: GluegunToolbox) => {
-  const { template, filesystem, print: { success } } = toolbox
+  const { template, filesystem } = toolbox
 
   async function createFile(folder: string, fileName: string, content: string, contentProps?: {[x: string]: any}) {
     await template.generate({
@@ -13,8 +13,6 @@ module.exports = (toolbox: GluegunToolbox) => {
       target: `${folder}/${fileName}`,
       props: contentProps || {}
     })
-
-    success(`File ${fileName} created`)
   }
 
   toolbox.createFile = createFile
