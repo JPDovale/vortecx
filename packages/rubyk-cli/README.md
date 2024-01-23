@@ -312,6 +312,18 @@ To showcase this flexibility, we will present all the configurations that can be
 
 It's worth noting that, except for the `type` property, all others can be defined using conversion patterns, making it possible to add imports, typings, interfaces, methods, etc., with standardized names.
 
+## Multiple File Generation
+
+You can generate multiple files at once using the command `npx rubyk multi-generate --generators service,controller,gateway --module user --file create`.
+
+Clearly, the generators `service, controller, gateway` must be defined in your configuration file. If you have aliases, you can use them.
+
+The `multi-generate` command can be abbreviated to `mgen` or just `mg`, and the `--generators` flag can be replaced with `-g`, which is mandatory for this command.
+
 ## Questions?
 
 Feel free to open an issue on our GitHub repository. It will be a pleasure to contribute to your progress!
+
+## Continuation...
+
+If there's more you would like to translate or discuss, please feel free to continue. I'm here to help!
