@@ -102,7 +102,7 @@ export const config: Config = {
 };
 ```
 
-Setting the property `-{^file}-` in the `name` field will make the generated class name in the file take the value provided after the `--file` flag, but using camelCase with the first letter capitalized.
+Setting the property `-{^file}-` in the `name` field will make the generated class name in the file take the value provided after the `--file` flag, but using PascalCase with the first letter capitalized.
 
 Example:
 For the input `npx rubyk g test -m test -f create`, we will get the following structure:
