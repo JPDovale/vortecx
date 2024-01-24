@@ -1,5 +1,11 @@
 # @rubykgen/rubyk-cli
 
+## 1.0.2
+
+### Patch Changes
+
+- Update templates
+
 ## 1.0.1
 
 ### Patch Changes
