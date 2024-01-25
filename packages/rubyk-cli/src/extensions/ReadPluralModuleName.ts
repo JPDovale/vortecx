@@ -4,7 +4,7 @@ module.exports = (toolbox: GluegunToolbox) => {
   const { parameters } = toolbox
 
   async function readPluralModuleName() {
-    const moduleName = parameters.options['pm'] ?? parameters.options['plural-module']
+    const moduleName = parameters.options['p'] ?? parameters.options['plural']
     return moduleName
   } 
 

@@ -147,20 +147,23 @@ This opens up a range of possibilities.
 
 ## Possible Patterns
 
-| Syntax       | Description                                                                                         | EX: Input | EX: Output |
-| ------------ | --------------------------------------------------------------------------------------------------- | --------- | ---------- |
-| -{module}-   | The substitution value will be retrieved from the `--module` or `-m` flag                           | test      | test       |
-| -{^module}-  |                                                                                                     | test      | Test       |
-| -{^^module}- |                                                                                                     | test      | TEST       |
-| -{name}-     | The substitution value will be retrieved from the `name` property defined in the configuration file | test      | test       |
-| -{^name}-    |                                                                                                     | test      | Test       |
-| -{^^name}-   |                                                                                                     | test      | TEST       |
-| -{file}-     | The substitution value will be retrieved from the `--file` or `-f` flag                             | test      | test       |
-| -{^file}-    |                                                                                                     | test      | Test       |
-| -{^^file}-   |                                                                                                     | test      | TEST       |
-| -{type}-     | The substitution value will be retrieved from the `type` property defined in the configuration file | test      | test       |
-| -{^type}-    |                                                                                                     | test      | Test       |
-| -{^^type}-   |                                                                                                     | test      | TEST       |
+| Syntax        | Description                                                                                                                      | EX: Input | EX: Output |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| -{module}-    | The substitution value will be retrieved from the `--module` or `-m` flag                                                        | test      | test       |
+| -{^module}-   |                                                                                                                                  | test      | Test       |
+| -{^^module}-  |                                                                                                                                  | test      | TEST       |
+| -{modules}-   | The substitution value will be retrieved from the `--plural` or `-p` flag, but it not defined is automatically set as module + s | test      | tests      |
+| -{^modules}-  |                                                                                                                                  | test      | Tests      |
+| -{^^modules}- |                                                                                                                                  | test      | TESTS      |
+| -{name}-      | The substitution value will be retrieved from the `name` property defined in the configuration file                              | test      | test       |
+| -{^name}-     |                                                                                                                                  | test      | Test       |
+| -{^^name}-    |                                                                                                                                  | test      | TEST       |
+| -{file}-      | The substitution value will be retrieved from the `--file` or `-f` flag                                                          | test      | test       |
+| -{^file}-     |                                                                                                                                  | test      | Test       |
+| -{^^file}-    |                                                                                                                                  | test      | TEST       |
+| -{type}-      | The substitution value will be retrieved from the `type` property defined in the configuration file                              | test      | test       |
+| -{^type}-     |                                                                                                                                  | test      | Test       |
+| -{^^type}-    |                                                                                                                                  | test      | TEST       |
 
 These are the main patterns for constructing paths or names, and you can use them concatenated in something like `name: '-{^file}--{^module}--{^type}-'` where, for the configuration
 

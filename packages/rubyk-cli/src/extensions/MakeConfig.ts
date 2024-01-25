@@ -47,7 +47,7 @@ module.exports = (toolbox: GluegunToolbox) => {
         module: moduleName, 
         file: fileName, 
         type: 'unknown',
-        pluralModule 
+        pluralModule: pluralModule ?? `${moduleName}s`
       }
     )
 

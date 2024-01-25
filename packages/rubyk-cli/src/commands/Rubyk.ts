@@ -14,7 +14,7 @@ const rubyk = {
       prompt: {
         ask,
       },
-      print: { error, spin }
+      print: { error, spin, }
     } = toolbox 
 
     const configPath = await readConfigFile()
@@ -36,7 +36,7 @@ const rubyk = {
 
     const config = await makeConfig('user', 'users', undefined, configPath) as Config
 
-    const res = await  ask([
+    const res = await ask([
       {
         message: 'Choice some modules to generate',
         name: 'modules',

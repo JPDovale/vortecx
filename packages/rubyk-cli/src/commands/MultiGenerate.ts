@@ -17,8 +17,6 @@ module.exports = {
 
     const moduleName = await readModuleName()
     const pluralModuleName = await readPluralModuleName()
-
-
     const fileName = await readFileName()
 
     const config = await makeConfig(moduleName, pluralModuleName, fileName) as Config

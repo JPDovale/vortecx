@@ -22,7 +22,7 @@ export interface ConfigOptions {
 
 export class Config extends Entity<ConfigProps> {
   static create(config: ConfigType, options: ConfigOptions) {
-    const opt = { ...options, file: options.file ?? 'index' }
+    const opt = { ...options, file: options.file ?? 'index', pluralModule: options.pluralModule ?? `${options.module}s` }
 
     return new Config({
       generators: config.generators.map((gen) => Generator.create(gen, opt)),
