@@ -14,7 +14,7 @@ const rubyk = {
       prompt: {
         ask,
       },
-      print: { error, spin, }
+      print: { error, spin, info }
     } = toolbox 
 
     const configPath = await readConfigFile()
@@ -38,14 +38,14 @@ const rubyk = {
 
     const res = await ask([
       {
-        message: 'Choice some modules to generate',
+        message: 'Please select multiple modules for which you wish to generate files. Choose as needed and proceed.',
         name: 'modules',
         type: 'multiselect',
         align: 'left',
         choices: modules.map(m => m.name),
       },
       {
-        message: 'Choice generators to create files',
+        message: 'Please select the generators you wish to use. Choose as needed and continue with the process.',
         name: 'generators',
         type: 'multiselect',
         choices: config.generators.map(m => ({
@@ -58,7 +58,10 @@ const rubyk = {
         name: 'file',
         type: 'input'
       }
-    ])
+    ]).catch(() => {
+      info('Cancelled')      
+      process.exit(1)
+    })
     
     if(!res.modules || res.modules.length === 0) {
       error('Modules are required')
