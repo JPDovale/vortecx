@@ -1,6 +1,6 @@
 {
   "name": "@rubykgen/rubyk-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "File generator CLI for typescript backend projects",
   "types": "build/types/types.d.ts",
   "bin": {

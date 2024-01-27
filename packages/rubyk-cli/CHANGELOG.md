@@ -1,5 +1,11 @@
 # @rubykgen/rubyk-cli
 
+## 1.0.4
+
+### Patch Changes
+
+- Fix error when command is cancelled
+
 ## 1.0.3
 
 ### Patch Changes
