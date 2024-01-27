@@ -1,11 +1,26 @@
 {
   "name": "@rubykgen/rubyk-cli",
   "version": "1.0.3",
-  "description": "",
+  "description": "File generator CLI for typescript backend projects",
   "types": "build/types/types.d.ts",
   "bin": {
     "rubyk": "bin/rubyk"
   },
+  "bugs": {
+    "email": "joaopaulodovaledeo.60@gmail.com",
+    "url": "https://github.com/JPDovale/rubyk-gen/issues"
+  },
+  "homepage": "https://github.com/JPDovale/rubyk-gen",
+  "keywords": [
+    "rubyk",
+    "cli",
+    "generator",
+    "file",
+    "typescript",
+    "POO",
+    "backend",
+    "productivity"
+  ],
   "scripts": {
     "dev": "tsx src/main.ts",
     "lint": "eslint src/**/*.ts* --fix",
@@ -22,7 +37,11 @@
     "docs",
     "bin"
   ],
-  "author": "",
+  "author": {
+    "name": "João Paulo do Vale de Oliveira",
+    "email": "joaopaulodovaledeo.60@gmail.com",
+    "url": "https://github.com/rubyk-gen/tree/master/packages/rubyk-cli#readme"
+  },
   "license": "ISC",
   "devDependencies": {
     "@rubykgen/eslint-config": "*",

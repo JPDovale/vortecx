@@ -323,6 +323,29 @@ Clearly, the generators `service, controller, gateway` must be defined in your c
 
 The `multi-generate` command can be abbreviated to `mgen` or just `mg`, and the `--generators` flag can be replaced with `-g`, which is mandatory for this command.
 
+## Standard Plugins
+
+Some plugins are provided as standard by the CLI for use in specific types of projects. For example, generation plugins for use with Prisma ORM and NestJS...
+Another standard plugin is the infrastructure file generation plugin.
+
+You can use these plugins by adding them respectively to your configuration file.
+NOTE: For these to work properly, you should add an array that defines the existing modules in your project.
+
+```typescript
+import { Config } from "@rubykgen/rubyk-cli";
+
+export const config: Config = {
+  modules: ["user", ["company", "companies"], "product", "market"],
+  plugins: ["infraGenerators", "nestGenerators", "prismaGenerators"],
+};
+```
+
+## Modules
+
+The modules array can be defined as just a string, or as an array containing two strings, with the first being the module name in singular and the second in plural. In the case of a single string, the plural name of the module will be considered as the received value followed by the addition of an 's' at the end.
+
+By defining the modules in your configuration file, you can simply execute `npx rubyk` in your integrated terminal... This will run the CLI in a more user-friendly way, allowing for a multiple selection of both the modules for generation and the generators to be used, bringing greater ease in executing the commands.
+
 ## Questions?
 
 Feel free to open an issue on our GitHub repository. It will be a pleasure to contribute to your progress!
