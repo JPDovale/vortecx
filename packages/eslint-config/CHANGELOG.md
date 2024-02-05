@@ -1,5 +1,11 @@
 # @rubykgen/eslint-config
 
+## 0.0.4
+
+### Patch Changes
+
+- Add plugin starters
+
 ## 0.0.3
 
 ### Patch Changes

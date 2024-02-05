@@ -2,7 +2,7 @@
   "name": "@rubykgen/eslint-config",
   "private": false,
   "description": "A eslint-config for Rubyk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "license": "ISC",
   "repository": {

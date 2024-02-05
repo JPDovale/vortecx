@@ -1,5 +1,5 @@
-import { GluegunToolbox } from "gluegun";
-import { Config } from "../modules/config/entities/Config";
+import { GluegunToolbox } from 'gluegun'
+import { Config } from '../modules/config/entities/Config'
 
 module.exports = {
   name: 'generate',
@@ -12,7 +12,7 @@ module.exports = {
       readPluralModuleName,
       generateFile,
       parameters,
-      print: { error, success }
+      print: { error, success },
     } = toolbox
 
     if (!parameters.first) {
@@ -23,10 +23,14 @@ module.exports = {
     const moduleName = await readModuleName()
     const pluralModuleName = await readPluralModuleName()
     const fileName = await readFileName()
-    const config = await makeConfig(moduleName, pluralModuleName, fileName) as Config
+    const config = (await makeConfig(
+      moduleName,
+      pluralModuleName,
+      fileName,
+    )) as Config
 
     await generateFile(config, parameters.first)
 
-    success("Done! You ready ^^")
-  }
+    success('Done! You ready ^^')
+  },
 }

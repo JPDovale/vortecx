@@ -1,6 +1,7 @@
 import { Generator } from '../../../modules/generator/entities/Generator'
 import { Entity } from '../../../shared/core/entities/Entity'
-import {Config as ConfigType} from 'src/types'
+import { Config as ConfigType } from 'src/types'
+import { Starter } from 'src/plugins/InfraGeneratorsStarters'
 
 export interface Module {
   name: string
@@ -18,26 +19,33 @@ export interface ConfigOptions {
   pluralModule: string
   file: string
   type: string
+  starters?: Starter[]
 }
 
 export class Config extends Entity<ConfigProps> {
   static create(config: ConfigType, options: ConfigOptions) {
-    const opt = { ...options, file: options.file ?? 'index', pluralModule: options.pluralModule ?? `${options.module}s` }
+    const opt = {
+      ...options,
+      file: options.file ?? 'index',
+      pluralModule: options.pluralModule ?? `${options.module}s`,
+      starters: options.starters ?? [],
+    }
 
     return new Config({
       generators: config.generators.map((gen) => Generator.create(gen, opt)),
       modules: [],
-      options: opt
+      options: opt,
     })
   }
 
-  findGenerator(type: string){
-    const generator = this.props.generators.find(generator => 
-      generator.type.toLocaleLowerCase() === type.toLocaleLowerCase() ||
-      generator.alias?.toLocaleLowerCase() === type.toLocaleLowerCase()
+  findGenerator(type: string) {
+    const generator = this.props.generators.find(
+      (generator) =>
+        generator.type.toLocaleLowerCase() === type.toLocaleLowerCase() ||
+        generator.alias?.toLocaleLowerCase() === type.toLocaleLowerCase(),
     )
 
-    return  generator ?? null
+    return generator ?? null
   }
 
   get generators() {
@@ -46,6 +54,10 @@ export class Config extends Entity<ConfigProps> {
 
   get modules() {
     return this.props.modules
+  }
+
+  get options() {
+    return this.props.options
   }
 
   set options(options: ConfigOptions) {

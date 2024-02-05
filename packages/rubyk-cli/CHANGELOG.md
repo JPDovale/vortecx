@@ -1,5 +1,11 @@
 # @rubykgen/rubyk-cli
 
+## 1.1.0
+
+### Minor Changes
+
+- Add plugin starters
+
 ## 1.0.4
 
 ### Patch Changes

@@ -1,25 +1,39 @@
-import { GluegunToolbox } from "gluegun";
-import { Config } from "../modules/config/entities/Config";
-import { Config as ConfigType } from "src/types";
-import { infraGenerators } from "../plugins/InfraGenerators";
-import { nestGenerators } from "../plugins/NestGenerators";
-import { prismaGenerators } from "../plugins/PrismaGenerators";
+import { GluegunToolbox } from 'gluegun'
+import { Config } from '../modules/config/entities/Config'
+import { Config as ConfigType } from 'src/types'
+import { infraGenerators } from '../plugins/InfraGenerators'
+import { nestGenerators } from '../plugins/NestGenerators'
+import { prismaGenerators } from '../plugins/PrismaGenerators'
+import {
+  infraGeneratorsStarters,
+  Starter,
+} from '../plugins/InfraGeneratorsStarters'
 
 module.exports = (toolbox: GluegunToolbox) => {
-  const { filesystem, print: { error }  } = toolbox
+  const {
+    filesystem,
+    print: { error },
+  } = toolbox
 
-  async function makeConfig(moduleName: string, pluralModule: string, fileName?: string, filePath?: string) {
-    if(!moduleName) {
+  async function makeConfig(
+    moduleName: string,
+    pluralModule: string,
+    fileName?: string,
+    filePath?: string,
+  ) {
+    if (!moduleName) {
       error('Module name is missing! Please specify it with --m or --module')
       process.exit(1)
     }
-   
-    const fp = filePath ? filePath :  await readConfigFile()
+
+    const fp = filePath || (await readConfigFile())
 
     const ConfigFile = await import(fp)
-    const configFile = ConfigFile.default as ConfigType 
+    const configFile = ConfigFile.default as ConfigType & {
+      starters?: Starter[]
+    }
 
-    if(configFile.generators.length === 0) {
+    if (configFile.generators.length === 0) {
       error('No generators found')
       process.exit(1)
     }
@@ -27,8 +41,8 @@ module.exports = (toolbox: GluegunToolbox) => {
     const seenType = new Set()
     const duplicatedGenerators = []
 
-    for(const generator of configFile.generators) {
-      if(seenType.has(generator.type)) {
+    for (const generator of configFile.generators) {
+      if (seenType.has(generator.type)) {
         duplicatedGenerators.push(generator)
         continue
       }
@@ -36,20 +50,21 @@ module.exports = (toolbox: GluegunToolbox) => {
       seenType.add(generator.type)
     }
 
-    if(duplicatedGenerators.length > 0) {
-      error('Duplicated generator types found: ' + duplicatedGenerators.map(gen => gen.type))
+    if (duplicatedGenerators.length > 0) {
+      error(
+        'Duplicated generator types found: ' +
+        duplicatedGenerators.map((gen) => gen.type),
+      )
       process.exit(1)
     }
 
-    const config = Config.create(
-      configFile, 
-      { 
-        module: moduleName, 
-        file: fileName, 
-        type: 'unknown',
-        pluralModule: pluralModule ?? `${moduleName}s`
-      }
-    )
+    const config = Config.create(configFile, {
+      module: moduleName,
+      file: fileName,
+      type: 'unknown',
+      pluralModule: pluralModule ?? `${moduleName}s`,
+      starters: configFile.starters,
+    })
 
     return config
   }
@@ -58,7 +73,7 @@ module.exports = (toolbox: GluegunToolbox) => {
     const configPath = filesystem.path(filesystem.cwd(), 'rubyk.ts')
     const configExists = filesystem.exists(configPath)
 
-    if(!configExists) {
+    if (!configExists) {
       error('Config file not found')
       process.exit(1)
     }
@@ -66,32 +81,58 @@ module.exports = (toolbox: GluegunToolbox) => {
     const cf = (await filesystem.readAsync(configPath)).split('=')[1]
     const cfjs = `module.exports = ${cf}`
 
-    const filePath = filesystem.path(filesystem.cwd(), 'node_modules', '@rubykgen', 'rubyk-cli', '.rubyk', 'rubyk.js')
+    const filePath = filesystem.path(
+      filesystem.cwd(),
+      'node_modules',
+      '@rubykgen',
+      'rubyk-cli',
+      '.rubyk',
+      'rubyk.js',
+    )
     await filesystem.writeAsync(filePath, cfjs)
 
     const defaultPlugins = {
       infraGenerators,
+      infraGeneratorsStarters,
       nestGenerators,
-      prismaGenerators
+      prismaGenerators,
     }
 
     const ConfigFile = await import(filePath)
-    const configFile = ConfigFile.default as ConfigType 
+    const configFile = ConfigFile.default as ConfigType & {
+      starters?: Starter[]
+    }
 
-    if(configFile.plugins && configFile.plugins.length > 0) {
-      for(const plugin of configFile.plugins) {
-        if(!configFile.generators) {
+    if (configFile.plugins && configFile.plugins.length > 0) {
+      for (const plugin of configFile.plugins) {
+        if (!configFile.generators) {
           configFile.generators = []
         }
 
-        if(!/^rubyk-\*\-plugin$/.test(plugin) && defaultPlugins[plugin]) {
-          configFile.generators.push(...defaultPlugins[plugin]())
+        if (!configFile.starters) {
+          configFile.starters = []
+        }
+
+        if (!/^rubyk-\*\\-plugin$/.test(plugin) && defaultPlugins[plugin]) {
+          const pluginFunction = defaultPlugins[plugin]
+          const starterPluginFunction = defaultPlugins[`${plugin}Starters`]
+
+          const pluginGenerators = pluginFunction ? pluginFunction() : []
+          const starterPluginGenerators = starterPluginFunction
+            ? starterPluginFunction()
+            : []
+
+          configFile.generators.push(...pluginGenerators)
+          configFile.starters.push(...starterPluginGenerators)
         }
       }
     }
 
-    await filesystem.writeAsync(filePath, `module.exports = ${JSON.stringify(configFile, null, 2)}`)
-    
+    await filesystem.writeAsync(
+      filePath,
+      `module.exports = ${JSON.stringify(configFile, null, 2)}`,
+    )
+
     return filePath
   }
 

@@ -1,4 +1,4 @@
-import { GeneratorConfig } from "src/types";
+import { GeneratorConfig } from 'src/types'
 
 export function infraGenerators(): GeneratorConfig[] {
   return [
