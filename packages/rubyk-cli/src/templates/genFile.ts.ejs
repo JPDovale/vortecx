@@ -50,7 +50,7 @@ export class <%= props.name %> <%
     }
 
     mth.annotations.forEach(ant => {
-      annotation = `@${ant}();${annotation}`
+      annotation = `@${ant}()${annotation}`
     })
 
     if(mth.returns.type[0]?.name.toLocaleLowerCase() === 'promise') {
