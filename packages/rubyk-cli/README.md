@@ -340,6 +340,8 @@ export const config: Config = {
 };
 ```
 
+Some of these plugins contain initializers for files that use these plugins. You can initialize them with `npx rubyk startPlugins`, `npx rubyk srtp`, or `npx rubyk sp`.
+
 ## Modules
 
 The modules array can be defined as just a string, or as an array containing two strings, with the first being the module name in singular and the second in plural. In the case of a single string, the plural name of the module will be considered as the received value followed by the addition of an 's' at the end.
