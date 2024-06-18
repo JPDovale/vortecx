@@ -9,6 +9,8 @@
     "extendss",
     "gluegun",
     "implementss",
-    "mgen"
+    "mgen",
+    "rubyktv",
+    "rubytv"
   ]
 }

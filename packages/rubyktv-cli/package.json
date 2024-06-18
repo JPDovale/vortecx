@@ -1,10 +1,10 @@
 {
-  "name": "@rubykgen/rubyk-cli",
-  "version": "1.1.0",
+  "name": "@rubykgen/rubyktv-cli",
+  "version": "0.0.1",
   "description": "File generator CLI for typescript backend projects",
   "types": "build/types/types.d.ts",
   "bin": {
-    "rubyk": "bin/rubyk"
+    "rubyktv": "bin/rubyktv"
   },
   "bugs": {
     "email": "joaopaulodovaledeo.60@gmail.com",
@@ -12,22 +12,17 @@
   },
   "homepage": "https://github.com/JPDovale/rubyk-gen",
   "keywords": [
-    "rubyk",
+    "rubyktv",
     "cli",
-    "generator",
-    "file",
-    "typescript",
-    "POO",
-    "backend",
+    "version",
     "productivity"
   ],
   "scripts": {
-    "dev": "tsx src/cli.ts",
+    "dev": "tsx src/index.ts",
     "lint": "eslint src/**/*.ts* --fix",
     "clean-build": "rimraf -rf ./build",
     "compile": "tsc -p .",
-    "copy-templates": "copyfiles ./src/templates/* ./build/templates",
-    "build": "yarn clean-build && yarn compile && yarn copy-templates",
+    "build": "yarn clean-build && yarn compile",
     "prepublishOnly": "yarn build"
   },
   "files": [
@@ -40,7 +35,7 @@
   "author": {
     "name": "João Paulo do Vale de Oliveira",
     "email": "joaopaulodovaledeo.60@gmail.com",
-    "url": "https://github.com/rubyk-gen/tree/master/packages/rubyk-cli#readme"
+    "url": "https://github.com/rubyk-gen/tree/master/packages/rubytv-cli#readme"
   },
   "license": "ISC",
   "devDependencies": {
@@ -56,7 +51,10 @@
     "typescript": "~4.5.0"
   },
   "dependencies": {
-    "gluegun": "^5.1.6"
+    "@rubykgen/rubyk-cli-maker": "*",
+    "chalk": "^5.3.0",
+    "figures": "^6.1.0",
+    "inquirer": "^9.2.23"
   },
   "husky": {
     "hooks": {

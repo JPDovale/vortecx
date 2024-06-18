@@ -1,5 +1,3 @@
-
-
 // export types
 
 export type TypeConfig = {
@@ -13,7 +11,7 @@ export type InterfaceConfig = {
   name: string
   pattern?: string
   extends?: GenericTypeConfig[]
-  export?: boolean  
+  export?: boolean
 }
 
 export type MethodConfig = {
@@ -38,7 +36,6 @@ export type ImportConfig = {
   imports: string[]
   from: string
 }
-
 
 export type GeneratorConfig = {
   name: string

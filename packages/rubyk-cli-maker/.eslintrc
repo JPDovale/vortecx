@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@rubykgen/eslint-config/node"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "warn"
+  }
+}
