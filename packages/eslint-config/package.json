@@ -1,12 +1,12 @@
 {
-  "name": "@rubykgen/eslint-config",
+  "name": "@vortecx/eslint-config",
   "private": false,
-  "description": "A eslint-config for Rubyk",
+  "description": "A eslint-config for Vortecx",
   "version": "0.0.4",
   "main": "index.js",
   "license": "ISC",
   "repository": {
-    "url": "JPDovale/rubyk-gen"
+    "url": "JPDovale/vortecx"
   },
   "peerDependencies": {
     "eslint": "^8.0.0",

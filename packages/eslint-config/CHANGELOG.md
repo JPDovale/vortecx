@@ -1,4 +1,4 @@
-# @rubykgen/eslint-config
+# @vortecx/eslint-config
 
 ## 0.0.4
 

@@ -1,4 +1,4 @@
-# @rubykgen/ts-config
+# @vortecx/ts-config
 
 ## 0.0.2
 

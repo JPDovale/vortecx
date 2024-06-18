@@ -1,4 +1,0 @@
-{
-  "extends": "@rubykgen/ts-config/base.json", 
-  "include": ["src/**/*"],
-}

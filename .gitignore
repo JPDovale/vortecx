@@ -132,7 +132,7 @@ dist
 # bun
 bun.*
 .turbo
-rubyk.ts
+filegen.ts
 **/build/**/*
 src/**/*
-**/.rubyk/**/*
+**/.filegen/**/*
