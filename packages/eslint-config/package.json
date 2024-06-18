@@ -2,7 +2,7 @@
   "name": "@vortecx/eslint-config",
   "private": false,
   "description": "A eslint-config for Vortecx",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "index.js",
   "license": "ISC",
   "repository": {

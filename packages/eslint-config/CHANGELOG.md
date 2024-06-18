@@ -1,5 +1,11 @@
 # @vortecx/eslint-config
 
+## 0.0.5
+
+### Patch Changes
+
+- Adding packages
+
 ## 0.0.4
 
 ### Patch Changes
