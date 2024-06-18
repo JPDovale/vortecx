@@ -28,8 +28,8 @@
     "clean-build": "rimraf -rf ./build",
     "compile": "tsc -p .",
     "copy-templates": "copyfiles ./src/templates/* ./build/templates",
-    "build": "yarn clean-build && yarn compile && yarn copy-templates",
-    "prepublishOnly": "yarn build"
+    "build": "npm run clean-build && npm run compile && npm run copy-templates",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "build",

@@ -22,8 +22,8 @@
     "lint": "eslint src/**/*.ts* --fix",
     "clean-build": "rimraf -rf ./build",
     "compile": "tsc -p .",
-    "build": "yarn clean-build && yarn compile",
-    "prepublishOnly": "yarn build"
+    "build": "npm run clean-build && npm run compile",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "build",
