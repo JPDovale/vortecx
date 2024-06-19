@@ -28,8 +28,8 @@
     "clean-build": "rimraf -rf ./build",
     "compile": "tsc -p .",
     "copy-templates": "copyfiles ./src/templates/* ./build/templates",
-    "build": "npm run clean-build && npm run compile && npm run copy-templates",
-    "prepublishOnly": "npm run build"
+    "build": "yarn clean-build && yarn compile && yarn copy-templates",
+    "prepublishOnly": "yarn build"
   },
   "files": [
     "build",
@@ -45,8 +45,8 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@vortecx/eslint-config": "workspace:*",
-    "@vortecx/ts-config": "workspace:*",
+    "@vortecx/eslint-config": "*",
+    "@vortecx/ts-config": "*",
     "@types/node": "^20.11.5",
     "copyfiles": "^2.4.1",
     "husky": "^5.1.3",
