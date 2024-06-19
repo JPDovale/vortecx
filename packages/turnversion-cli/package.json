@@ -1,6 +1,6 @@
 {
   "name": "@vortecx/turnversion-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A cli to turn any metadata of your projects",
   "types": "build/types/types.d.ts",
   "bin": {

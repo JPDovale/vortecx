@@ -16,6 +16,13 @@ const forPathsOption = Option.create({
   type: OptionType.LIST,
 })
 
+const forPathOption = Option.create({
+  name: 'Fot path',
+  long: 'for-path',
+  short: 'fp',
+  description: 'Define path to turn get version',
+})
+
 const turnVersionCommand = Command.create<{
   forPaths: string[]
   type: 'patch' | 'minor' | 'major'
@@ -89,6 +96,15 @@ const initCommand = Command.create<{
       defaultValue: false,
     }),
   ],
+})
+
+const getVersionCommand = Command.create<{
+  forPath: string
+}>({
+  name: 'get-version',
+  aliases: ['gv'],
+  description: 'Get version',
+  options: [forPathOption],
 })
 
 turnVersionCommand.addHandler((args) => {
@@ -248,8 +264,31 @@ initCommand.addHandler((args) => {
   })
 })
 
+getVersionCommand.addHandler((args) => {
+  const { forPath } = args.args
+  const { executionPath, workers } = args
+
+  const getVersionForPath = forPath ?? executionPath
+
+  const projectPath = workers.folders.getPath(getVersionForPath)
+  const projectInitialized = workers.files.exists([
+    projectPath,
+    'package.json',
+  ])
+
+  if (!projectInitialized) {
+    workers.logger.exit.error(' Project not initialized...')
+  }
+
+  const packageJson = workers.files.read([projectPath, 'package.json'])
+  const version = packageJson.get('version')
+  
+  console.log(version)
+})
+
 cli.addCommand(initCommand)
 cli.addCommand(turnVersionCommand)
 cli.addCommand(turnNameCommand)
+cli.addCommand(getVersionCommand)
 
 export default cli
