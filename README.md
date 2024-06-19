@@ -2,7 +2,7 @@
 
 Vortecx is a development toolkit designed to accelerate software development using TypeScript.
 
-## <a href="./packages/vortecx/README.md#filegen-cli">File Generation</a> CLI - Vortecx
+## <a href="./packages/filegen-cli/README.md#filegen-cli">File Generation</a> CLI - Vortecx
 
 The File Generation CLI in Vortecx offers a flexible approach to accelerate TypeScript software development. With the aim of not slowing down the development process, the CLI does not impose restrictions on folder structures, providing wide flexibility.
 
