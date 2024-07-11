@@ -13,6 +13,7 @@
       "dom"
     ],
     "module": "commonjs",
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "noImplicitAny": false,
     "noImplicitThis": true,
@@ -21,8 +22,8 @@
     "strict": false,
     "target": "es5",
     "declaration": true,
-    "declarationDir": "build/types",
+    "declarationDir": "build/types"
   },
-  "extends": "@vortecx/ts-config/base.json", 
-  "include": ["src/**/*"],
+  "extends": "@vortecx/ts-config/base.json",
+  "include": ["src/**/*"]
 }

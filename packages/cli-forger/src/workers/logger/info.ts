@@ -1,9 +1,9 @@
-import chalk from 'chalk'
-import { workers } from '../index'
+import chalk from "chalk";
+import { workers } from "../index";
 
 export function info(...args: unknown[]) {
   workers.logger.log(
-    chalk.bgBlueBright.white.bold('[INFO]'),
+    chalk.bgBlue.black.bold("[INFO]"),
     ...args.map((arg) => chalk.blue(arg)),
-  )
+  );
 }

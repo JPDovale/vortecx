@@ -1,2 +1,2 @@
-export { createIfNotExists } from './createIfNotExists'
-export { getPath } from './getPath'
+export { createIfNotExists } from "./createIfNotExists";
+export { exists } from "./exists";
