@@ -101,6 +101,16 @@ initCommand.addHandler(async ({ workers, args }) => {
     [initProjectPath, "tsconfig.json"],
   );
 
+  workers.templates.save(
+    [templatesPath, "gitignore.vort"],
+    [initProjectPath, ".gitignore"],
+  );
+
+  workers.templates.save(
+    [templatesPath, "npmrc.vort"],
+    [initProjectPath, ".npmrc"],
+  );
+
   workers.folders.createIfNotExists([initProjectPath, "src"], {
     exitOnExists: false,
   });
@@ -121,6 +131,11 @@ initCommand.addHandler(async ({ workers, args }) => {
   workers.prompt.executeInFolder(
     initProjectPath,
     "npm i @vortecx/cli-forger && npm i --save-dev @vortecx/eslint-config @types/node tsx typescript",
+  );
+
+  workers.prompt.executeInFolder(
+    initProjectPath,
+    'git init -b "main" && git add . && git commit -m "first commit"',
   );
 
   loading.stop();
