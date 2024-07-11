@@ -1,5 +1,11 @@
 # @vortecx/cli-forger
 
+## 0.0.5
+
+### Patch Changes
+
+- Adding readme
+
 ## 0.0.4
 
 ### Patch Changes
