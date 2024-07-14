@@ -271,8 +271,8 @@ const specialFallbackSymbols = {
 	oneTenth: '1/10',
 };
 
-export const mainSymbols = {...common, ...specialMainSymbols};
-export const fallbackSymbols = {...common, ...specialFallbackSymbols};
+const mainSymbols = {...common, ...specialMainSymbols};
+const fallbackSymbols = {...common, ...specialFallbackSymbols};
 
 const shouldUseMain = supportUnicode();
 const figures = shouldUseMain ? mainSymbols : fallbackSymbols;
