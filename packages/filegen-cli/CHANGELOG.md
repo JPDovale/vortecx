@@ -1,5 +1,16 @@
 # @vortecx/filegen-cli
 
+## 2.0.0
+
+### Major Changes
+
+- Add templating generators
+
+### Patch Changes
+
+- Updated dependencies
+  - @vortecx/cli-forger@0.0.7
+
 ## 1.1.1
 
 ### Patch Changes

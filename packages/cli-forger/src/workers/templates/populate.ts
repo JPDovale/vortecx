@@ -9,6 +9,13 @@ export function populate(
   const file = workers.files.read(parsedPath);
   const template = file.get();
 
-  const output = mustache.render(template, data);
+  const output = mustache.render(
+    template,
+    data,
+    {},
+    {
+      escape: (v) => v,
+    },
+  );
   return output;
 }

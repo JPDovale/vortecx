@@ -37,7 +37,7 @@ export function createIfNotExists(
     );
   }
 
-  if (!exitOnExists && existsPath) {
+  if (!exitOnExists && existsPath && showInfosLog) {
     workers.logger.info(messageWhenExists);
   }
 

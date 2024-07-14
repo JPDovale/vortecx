@@ -2,19 +2,19 @@
   "name": "{{name}}",
   "version": "0.0.1",
   "description": "",
-  "types": "build/types/types.d.ts",
+  "types": "build/types.d.ts",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx src/index.ts",
+    "dev": "npm run clear-build && tsup --watch",
     "lint": "eslint src/**/*.ts* --fix",
     "clear-build": "rimraf -rf ./build",
-    "compile": "tsc -p .",
+    "compile": "tsup",
     "build": "npm run clear-build && npm run compile"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bin": {
-    "{{name}}": "build/src/index.js"
+    "{{name}}": "build/index.js"
   }
 }

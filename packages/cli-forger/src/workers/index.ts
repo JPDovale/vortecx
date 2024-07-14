@@ -6,7 +6,19 @@ import * as templates from "./templates";
 import * as prompt from "./prompt";
 import figures from "./figures";
 
-export type Workers = typeof workers;
+export type WorkersExtensions<T> = {
+  [K in keyof T]: T[K] extends (arg: any, ...args: infer P) => infer R
+    ? (...args: P) => R
+    : never;
+};
+
+export type Workers<
+  T extends {
+    [x: string]: (args?: any) => any;
+  },
+> = typeof workers & {
+  extensions: T;
+};
 
 export const workers = {
   files,

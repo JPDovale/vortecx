@@ -6,7 +6,7 @@ import { Command } from "./command";
 import { Option } from "./option";
 import { helpOption } from "./options/helpOptions";
 import { cwd } from "process";
-import { workers } from "./workers";
+import { Workers, workers } from "./workers";
 
 interface CliForgerConfig {
   name: string;
@@ -14,11 +14,13 @@ interface CliForgerConfig {
   version: string;
 }
 
-export class CliForger {
+export class CliForger<W extends {} = {}> {
   private prog: CommandCommander;
+  private workers: Workers<W>;
 
   constructor({ description, name, version }: CliForgerConfig) {
     this.prog = new CommandCommander();
+    this.workers = { ...workers, extensions: {} as W };
 
     this.addOption(helpOption);
 
@@ -30,7 +32,7 @@ export class CliForger {
       .helpOption(false);
   }
 
-  public addDefaultCommand<T = unknown>(command: Command<T>) {
+  public addDefaultCommand<T = unknown>(command: Command<T, W>) {
     const defaultCommand = this.makeCommand(command);
     this.prog.addCommand(defaultCommand, {
       isDefault: true,
@@ -41,7 +43,7 @@ export class CliForger {
     return this.prog.parse(argv);
   }
 
-  private makeCommand<T = unknown>(command: Command<T>) {
+  private makeCommand<T = unknown>(command: Command<T, W>) {
     const cmd = new CommandCommander();
 
     cmd
@@ -56,7 +58,7 @@ export class CliForger {
         command.handler({
           args: args[0],
           executionPath: cwd(),
-          workers,
+          workers: this.workers,
           rawArgs: args,
         });
       });
@@ -75,7 +77,7 @@ export class CliForger {
     return cmd;
   }
 
-  public addCommand<T = unknown>(command: Command<T>) {
+  public addCommand<T = unknown>(command: Command<T, W>) {
     const newCommand = this.makeCommand(command);
     this.prog.addCommand(newCommand);
   }
@@ -84,5 +86,21 @@ export class CliForger {
     this.prog
       .option(option.getFlags(), option.description, option.defaultValue ?? "")
       .action((...args) => option.handler?.(...args));
+  }
+
+  public addExtensions(extensions: {
+    [x: string]: (props: Workers<W>, args?: any) => any;
+  }) {
+    Object.entries(extensions).forEach(([key, extension]) =>
+      this.addExtension(key, extension),
+    );
+  }
+
+  private addExtension(
+    name: string,
+    extension: (props: Workers<W>, args?: any) => any,
+  ) {
+    this.workers.extensions[name] = (args?: any) =>
+      extension(this.workers, args);
   }
 }

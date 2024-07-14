@@ -4,38 +4,40 @@ import { Optional } from "./types/optional";
 import { Workers } from "./workers";
 import chalk from "chalk";
 
-interface HandlerProps<T = unknown> {
+interface HandlerProps<T = unknown, W extends {} = {}> {
   args: T;
   rawArgs: any[];
   executionPath: string;
-  workers: Workers;
+  workers: Workers<W>;
 }
 
-interface CommandProps<T = unknown> {
+interface CommandProps<T = unknown, W = {}> {
   name: string;
   description: string;
   options: Option[];
   aliases: string[];
-  handler: (props: HandlerProps<T>) => void;
+  handler: (props: HandlerProps<T, W>) => void;
 }
 
-export class Command<T = unknown> extends ValueObject<CommandProps<T>> {
-  static create<K = unknown>(
-    props: Optional<CommandProps<K>, "handler" | "options" | "aliases">,
+export class Command<T = unknown, W = {}> extends ValueObject<
+  CommandProps<T, W>
+> {
+  static create<K = unknown, Y = {}>(
+    props: Optional<CommandProps<K, Y>, "handler" | "options" | "aliases">,
   ) {
-    const commandProps: CommandProps<K> = {
-      name: props.name.toLocaleLowerCase(),
+    const commandProps: CommandProps<K, Y> = {
+      name: props.name.toLocaleLowerCase().replace(/\s+/g, "-"),
       aliases: props.aliases ?? [],
       description: props.description,
       options: props.options ?? [],
       handler: props.handler ?? Command.defaultHandler(props.name),
     };
 
-    const command = new Command<K>(commandProps);
+    const command = new Command<K, Y>(commandProps);
     return command;
   }
 
-  addHandler(handler: (args: HandlerProps<T>) => void) {
+  addHandler(handler: (args: HandlerProps<T, W>) => void) {
     this.props.handler = handler;
   }
 

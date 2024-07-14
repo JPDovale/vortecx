@@ -1,6 +1,6 @@
 {
   "name": "@vortecx/cli-forger",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Make yours cli's easy and fast with samples files",
   "types": "build/index.d.ts",
   "main": "build/index.js",
@@ -20,7 +20,7 @@
     "productivity"
   ],
   "scripts": {
-    "dev": "tsup --watch src/main.ts",
+    "dev": "yarn clean-build && tsup --watch",
     "lint": "eslint src/**/*.ts* --fix",
     "clean-build": "rimraf -rf ./build",
     "compile": "tsup",
@@ -58,6 +58,7 @@
   "dependencies": {
     "chalk": "4.1.2",
     "commander": "^12.1.0",
+    "enquirer": "2.4.1",
     "inquirer": "10.0.1",
     "lodash": "^4.17.21",
     "mustache": "4.2.0",

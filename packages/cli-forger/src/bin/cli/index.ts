@@ -53,14 +53,19 @@ sayHelloCommand.addHandler(({ args, workers }) => {
 
 initCommand.addHandler(async ({ workers, args }) => {
   const { folder } = args;
-  const res = await workers.prompt.ask([
-    {
-      name: "name",
-      required: true,
-      type: "input",
-      message: "Project name",
-    },
-  ]);
+  const res = await workers.prompt
+    .ask<{ name: string }>([
+      {
+        name: "name",
+        required: true,
+        type: "input",
+        message: "Project name",
+      },
+    ])
+    .catch(() => {
+      workers.logger.exit.info("Canceled");
+      process.exit(0);
+    });
 
   const name = res.name
     .replace(/[<>:"\/\\|?*\x00-\x1F]/g, "") // Remove caracteres inválidos no Windows
@@ -111,7 +116,16 @@ initCommand.addHandler(async ({ workers, args }) => {
     [initProjectPath, ".npmrc"],
   );
 
+  workers.templates.save(
+    [templatesPath, "tsup.config.js.vort"],
+    [initProjectPath, "tsup.config.js"],
+  );
+
   workers.folders.createIfNotExists([initProjectPath, "src"], {
+    exitOnExists: false,
+  });
+
+  workers.folders.createIfNotExists([initProjectPath, "src", "templates"], {
     exitOnExists: false,
   });
 
@@ -130,7 +144,7 @@ initCommand.addHandler(async ({ workers, args }) => {
 
   workers.prompt.executeInFolder(
     initProjectPath,
-    "npm i @vortecx/cli-forger && npm i --save-dev @vortecx/eslint-config @types/node tsx typescript",
+    "npm i @vortecx/cli-forger && npm i --save-dev @vortecx/eslint-config @types/node tsup typescript @swc/core",
   );
 
   workers.prompt.executeInFolder(

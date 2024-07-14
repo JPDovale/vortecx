@@ -1,5 +1,11 @@
 # @vortecx/cli-forger
 
+## 0.0.7
+
+### Patch Changes
+
+- Add templating generators
+
 ## 0.0.6
 
 ### Patch Changes

@@ -1,25 +1,22 @@
-import { build } from 'gluegun'
-import filegen from './commands/Filegen'
-import { Command } from 'gluegun/build/types/domain/command'
+import { CliForger } from "@vortecx/cli-forger";
+import { version, description } from "../package.json";
+import { initCommand } from "./commands/init";
+import { listModulesCommand } from "./commands/listModules";
+import { extensions, Extensions } from "./extensions";
+import { moldCommand } from "./commands/mold";
+import { generateCommand } from "./commands/generate";
 
-async function run(argv) {
-  const cli = build()
-    .brand('vortecx')
-    .src(__dirname)
-    .plugins('./node_modules', {
-      matching: 'filegen-*-plugin',
-      hidden: true,
-    })
-    .help()
-    .version()
-    .create()
+const cli = new CliForger<Extensions>({
+  name: "File generator CLI",
+  version: version,
+  description,
+});
 
-  cli.defaultCommand = filegen as Command
-  const toolbox = await cli.run(argv)
+cli.addExtensions(extensions);
 
-  return toolbox
-}
+cli.addCommand(initCommand);
+cli.addCommand(moldCommand);
+cli.addCommand(generateCommand);
+cli.addCommand(listModulesCommand);
 
-module.exports = {
-  run,
-}
+export default cli;

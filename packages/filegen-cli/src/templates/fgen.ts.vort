@@ -1,0 +1,5 @@
+import { Config } from '{{from}}' 
+
+export const config: Config = { 
+  modules: [],
+}
