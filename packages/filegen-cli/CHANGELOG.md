@@ -1,5 +1,11 @@
 # @vortecx/filegen-cli
 
+## 2.0.1
+
+### Patch Changes
+
+- add docs
+
 ## 2.0.0
 
 ### Major Changes
