@@ -10,7 +10,7 @@ interface CreateOptions {
   showInfosLog?: boolean;
 }
 
-export function create(
+export async function create(
   rawPaths: string[] | string,
   content: { [x: number | string]: any } | string,
   options: CreateOptions = {},
@@ -23,7 +23,7 @@ export function create(
   } = options;
 
   const path = workers.path.getPath(rawPaths);
-  const fileExists = workers.files.exists(path);
+  const fileExists = await workers.files.exists(path);
 
   if (fileExists && exitOnExists) {
     workers.logger.exit.error(
@@ -34,7 +34,7 @@ export function create(
   }
 
   if (fileExists) {
-    const file = workers.files.read(path);
+    const file = await workers.files.read(path);
 
     if (updateOnExists) {
       if (showInfosLog) {
@@ -43,7 +43,7 @@ export function create(
       }
 
       file.set(content);
-      file.save();
+      await file.save();
     }
 
     return file;
@@ -58,7 +58,7 @@ export function create(
     workers.logger.info(` Creating file ${workers.figures.pointer} ${path}`);
   }
 
-  file.save();
+  await file.save();
 
   return file;
 }

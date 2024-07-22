@@ -1,6 +1,6 @@
 import { ValueObject } from "../../base/valueObject";
 import { Optional } from "../../types/optional";
-import fs from "fs";
+import fs from "fs/promises";
 
 export enum FileType {
   JSON = "json",
@@ -79,8 +79,8 @@ export class File extends ValueObject<FileProps> {
     this.props.rawContent = JSON.stringify(this.props.jsonContent, null, 2);
   }
 
-  save() {
-    fs.writeFileSync(this.props.path, this.props.rawContent);
+  async save() {
+    return fs.writeFile(this.props.path, this.props.rawContent);
   }
 
   private static rawIsJson(str: string): boolean {

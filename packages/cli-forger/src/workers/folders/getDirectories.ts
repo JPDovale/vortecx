@@ -1,14 +1,19 @@
-import fs from "fs";
+import fs from "fs/promises";
 import { workers } from "..";
 
-export function getDirectories(rawPath: string | string[]) {
+export async function getDirectories(rawPath: string | string[]) {
   const path = workers.path.getPath(rawPath);
 
-  const dirs = fs.readdirSync(path).filter((name) => {
-    const childPath = workers.path.getPath([path, name]);
-    const childIsDirectory = fs.statSync(childPath).isDirectory();
-    return childIsDirectory;
-  });
+  const dirs = await fs.readdir(path);
+  const directories: string[] = [];
 
-  return dirs;
+  for (const dir in dirs) {
+    const childPath = workers.path.getPath([path, dir]);
+    const childStas = await fs.stat(childPath);
+    const childIsDirectory = childStas.isDirectory();
+
+    if (childIsDirectory) directories.push(childPath);
+  }
+
+  return directories;
 }

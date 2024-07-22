@@ -25,32 +25,6 @@ const initCommand = Command.create<{
   ],
 });
 
-const sayHelloCommand = Command.create<{ for: string }>({
-  name: "Say hello",
-  description: "Say hello for world or anyone",
-  aliases: ["sh"],
-  options: [
-    Option.create({
-      name: "For anyone",
-      description: "Define woo receive hello",
-      required: false,
-      long: "for",
-      short: "f",
-    }),
-  ],
-});
-
-sayHelloCommand.addHandler(({ args, workers }) => {
-  const { for: forAnyone } = args;
-
-  if (forAnyone) {
-    workers.logger.info(`Hello ${forAnyone}!`);
-    return;
-  }
-
-  workers.logger.info("Hello world!");
-});
-
 initCommand.addHandler(async ({ workers, args }) => {
   const { folder } = args;
   const res = await workers.prompt
@@ -79,62 +53,68 @@ initCommand.addHandler(async ({ workers, args }) => {
     name,
   ]);
 
-  const existsFile = workers.files.exists([initProjectPath, "package.json"]);
+  const existsFile = await workers.files.exists([
+    initProjectPath,
+    "package.json",
+  ]);
   if (existsFile) {
     workers.logger.exit.error("Project already exist in this folder");
   }
 
-  workers.folders.createIfNotExists(initProjectPath, {
+  await workers.folders.createIfNotExists(initProjectPath, {
     exitOnExists: false,
   });
 
   const templatesPath = workers.path.getPath([__dirname, "cli", "templates"]);
 
-  workers.templates.save(
+  await workers.templates.save(
     [templatesPath, "package.json.vort"],
     [initProjectPath, "package.json"],
     { name },
   );
 
-  workers.templates.save(
+  await workers.templates.save(
     [templatesPath, "eslintrc.vort"],
     [initProjectPath, ".eslintrc"],
   );
 
-  workers.templates.save(
+  await workers.templates.save(
     [templatesPath, "tsconfig.json.vort"],
     [initProjectPath, "tsconfig.json"],
   );
 
-  workers.templates.save(
+  await workers.templates.save(
     [templatesPath, "gitignore.vort"],
     [initProjectPath, ".gitignore"],
   );
 
-  workers.templates.save(
+  await workers.templates.save(
     [templatesPath, "npmrc.vort"],
     [initProjectPath, ".npmrc"],
   );
 
-  workers.templates.save(
+  await workers.templates.save(
     [templatesPath, "tsup.config.js.vort"],
     [initProjectPath, "tsup.config.js"],
   );
 
-  workers.folders.createIfNotExists([initProjectPath, "src"], {
+  await workers.folders.createIfNotExists([initProjectPath, "src"], {
     exitOnExists: false,
   });
 
-  workers.folders.createIfNotExists([initProjectPath, "src", "templates"], {
-    exitOnExists: false,
-  });
+  await workers.folders.createIfNotExists(
+    [initProjectPath, "src", "templates"],
+    {
+      exitOnExists: false,
+    },
+  );
 
-  workers.templates.save(
+  await workers.templates.save(
     [templatesPath, "index.ts.vort"],
     [initProjectPath, "src", "index.ts"],
   );
 
-  workers.templates.save(
+  await workers.templates.save(
     [templatesPath, "cli.ts.vort"],
     [initProjectPath, "src", "cli.ts"],
     { name },
@@ -156,6 +136,5 @@ initCommand.addHandler(async ({ workers, args }) => {
 });
 
 cli.addDefaultCommand(initCommand);
-cli.addCommand(sayHelloCommand);
 
 export default cli;

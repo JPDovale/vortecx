@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import { workers } from "../index";
 import { isArray } from "lodash";
 import { cwd } from "process";
@@ -9,7 +9,7 @@ interface CreateIfNotExistsOptions {
   showInfosLog?: boolean;
 }
 
-export function createIfNotExists(
+export async function createIfNotExists(
   rawPath: string[] | string,
   options: CreateIfNotExistsOptions = {},
 ) {
@@ -27,7 +27,7 @@ export function createIfNotExists(
     );
   }
   const pathToFind = workers.path.getPath(rawPath);
-  const existsPath = workers.folders.exists(rawPath);
+  const existsPath = await workers.folders.exists(rawPath);
 
   if (exitOnExists && existsPath) {
     workers.logger.exit.error(
@@ -48,7 +48,7 @@ export function createIfNotExists(
           ` Creating folder ${workers.figures.pointer} ${pathToFind}`,
         );
       }
-      fs.mkdirSync(pathToFind, { recursive: true });
+      await fs.mkdir(pathToFind, { recursive: true });
     } catch (err) {
       workers.logger.exit.error("Cannot create folder", pathToFind, err);
     }

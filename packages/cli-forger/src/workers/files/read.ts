@@ -1,5 +1,5 @@
 import path from "path";
-import fs from "fs";
+import fs from "fs/promises";
 import { File } from "./File";
 import { isArray } from "lodash";
 import { workers } from "../index";
@@ -10,12 +10,15 @@ interface ReadOptions {
   messageWhenNotExists?: string;
 }
 
-export function read(rawPath: string[] | string, options: ReadOptions = {}) {
+export async function read(
+  rawPath: string[] | string,
+  options: ReadOptions = {},
+) {
   const { exitOnNotExists = true, messageWhenNotExists = " File not found!" } =
     options;
   const rawPaths = isArray(rawPath) ? rawPath : [rawPath];
   const pathToRead = path.resolve(...rawPaths);
-  const fileExist = fs.existsSync(pathToRead);
+  const fileExist = await workers.files.exists(pathToRead);
 
   if (exitOnNotExists && !fileExist) {
     workers.logger.exit.error(
@@ -34,7 +37,7 @@ export function read(rawPath: string[] | string, options: ReadOptions = {}) {
     return file;
   }
 
-  const content = fs.readFileSync(pathToRead, "utf8");
+  const content = await fs.readFile(pathToRead, "utf8");
 
   file.set(content);
 

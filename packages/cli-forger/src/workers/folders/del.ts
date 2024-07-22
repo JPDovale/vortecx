@@ -1,10 +1,11 @@
-import fs from "fs";
+import fs from "fs/promises";
 import { workers } from "..";
 
-export function del(rawPath: string | string[]) {
+export async function del(rawPath: string | string[]) {
   const path = workers.path.getPath(rawPath);
+  const folderExists = await workers.folders.exists(path);
 
-  if (workers.folders.exists(path)) {
-    fs.rmSync(path, { force: true, recursive: true });
+  if (folderExists) {
+    await fs.rmdir(path, { recursive: true });
   }
 }

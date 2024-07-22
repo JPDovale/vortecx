@@ -4,6 +4,7 @@ import * as folders from "./folders";
 import * as logger from "./logger";
 import * as templates from "./templates";
 import * as prompt from "./prompt";
+import * as ui from "./ui";
 import figures from "./figures";
 
 export type WorkersExtensions<T> = {
@@ -28,4 +29,5 @@ export const workers = {
   templates,
   path,
   prompt,
+  ui,
 };

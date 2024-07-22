@@ -5,79 +5,41 @@ import {
   Command as CommandCommander,
   Option as OptionCommander,
 } from "commander";
+import { Item } from "src/workers/ui/line";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function customHelpAction(...args: any[]) {
   const { options, commands } = args[1];
   const name = args[1]?.name() ?? "";
 
-  console.log(chalk.green("  [HELP]"), "Welcome to help informations");
-  console.log(
-    chalk.green("  [USAGE]"),
-    chalk.green.bold(name),
-    chalk.yellow("[Options]"),
-    chalk.blue("<Command>"),
-  );
-  console.log(chalk.gray("  ".padEnd(120, workers.figures.infinity)));
-  console.log(chalk.yellow.bold("  Options"));
-
-  if (options.length === 0) {
-    console.log(workers.figures.play, chalk.gray(" No options defined"));
-  }
+  const optionsItems: Item[][] = [];
+  const commandItems: Item[][] = [];
 
   if (options.length > 0) {
-    console.log(
-      chalk.gray.bold(
-        "  Req".padEnd(6, " "),
-        // workers.figures.play,
-        "Short".padEnd(6, " "),
-        // workers.figures.play,
-        "Long".padEnd(18, " "),
-        // workers.figures.play,
-        "Description",
-      ),
-    );
-
     options.forEach((option: OptionCommander) => {
       const notNullableShort = (option?.short ?? "").padEnd(4, " ");
       const notNullableLong = (option?.long ?? "").padEnd(16, " ");
       const notNullableDescription = option?.description ?? "";
+      const isRequired = option?.required && !option.defaultValue;
+      const isRequiredSimbol = isRequired
+        ? workers.figures.tick
+        : workers.figures.cross;
+      const isRequiredColor = isRequired ? chalk.greenBright : chalk.redBright;
 
-      console.log(
-        chalk.bold(
-          workers.figures.bullet,
-          option?.required && !option?.defaultValue
-            ? chalk.greenBright(workers.figures.tick.padEnd(4, " "))
-            : chalk.redBright(workers.figures.cross.padEnd(4, " ")),
-          chalk.gray(workers.figures.pointer),
-          notNullableShort,
-          chalk.gray(workers.figures.pointer),
-          notNullableLong,
-          chalk.gray(workers.figures.pointer),
-          notNullableDescription,
-        ),
-      );
+      optionsItems.push([
+        workers.figures.bullet,
+        [isRequiredSimbol.padEnd(4, " "), isRequiredColor],
+        [workers.figures.pointer, chalk.gray],
+        notNullableShort,
+        [workers.figures.pointer, chalk.gray],
+        notNullableLong,
+        [workers.figures.pointer, chalk.gray],
+        notNullableDescription,
+      ]);
     });
   }
 
-  console.log(chalk.gray("  ".padEnd(120, workers.figures.infinity)));
-  console.log(chalk.blue.bold("  Commands"));
-
-  if (commands.length === 0) {
-    console.log(workers.figures.play, chalk.gray("No commands defined"));
-  }
-
   if (commands.length > 0) {
-    console.log(
-      chalk.gray.bold(
-        "  Name".padEnd(18, " "),
-        // workers.figures.play,
-        "Aliases".padEnd(12, " "),
-        // workers.figures.play,
-        "Description",
-      ),
-    );
-
     commands.push({
       name: () => "<COMMAND> help",
       description: () => "Show more information about a command",
@@ -88,23 +50,79 @@ function customHelpAction(...args: any[]) {
       const notNullableDescription = command?.description?.() ?? "";
       const aliases = command?.aliases?.().join(", ");
       const notNullableAliases = (
-        !aliases || aliases.length === 0 ? chalk.gray("No aliases") : aliases
-      ).padEnd(10, " ");
+        !aliases || aliases.length === 0 ? "No aliases" : aliases
+      ).padEnd(12, " ");
 
-      console.log(
-        chalk.bold(
-          workers.figures.bullet,
-          notNullableName,
-          chalk.gray(workers.figures.pointer),
-          notNullableAliases,
-          chalk.gray(workers.figures.pointer),
-          notNullableDescription,
-        ),
-      );
+      commandItems.push([
+        workers.figures.bullet,
+        notNullableName,
+        [workers.figures.pointer, chalk.gray],
+        notNullableAliases,
+        [workers.figures.pointer, chalk.gray],
+        notNullableDescription,
+      ]);
     });
   }
 
-  console.log(chalk.gray("  ".padEnd(120, workers.figures.infinity)));
+  console.log(
+    workers.ui.box({
+      title: "HELP",
+      width: workers.ui.getColumns() < 120 ? workers.ui.getColumns() : 120,
+      lines: [
+        [["  [HELP]", chalk.green], "Welcome to help informations"],
+        [
+          ["  [USAGE]", chalk.green],
+          [name, chalk.green.bold],
+          ["[Options]", chalk.yellow],
+          ["<Command>", chalk.blue],
+        ],
+        [],
+      ],
+      sections: [
+        {
+          title: ["Options", chalk.yellow.bold],
+          lines: [
+            [
+              [
+                "  Req"
+                  .padEnd(7, " ")
+                  .concat("Short".padEnd(7, " "))
+                  .concat("Long".padEnd(19, " "))
+                  .concat("Description"),
+                chalk.gray.bold,
+              ],
+            ],
+            ...optionsItems,
+          ],
+          isEmptyWith: 1,
+          emptyLines: [
+            workers.figures.play,
+            [" No options defined", chalk.gray],
+          ],
+        },
+        {
+          title: ["Commands", chalk.blue.bold],
+          lines: [
+            [
+              [
+                "  Name"
+                  .padEnd(19, " ")
+                  .concat("Aliases".padEnd(15, " "))
+                  .concat("Description"),
+                chalk.gray.bold,
+              ],
+            ],
+            ...commandItems,
+          ],
+          isEmptyWith: 1,
+          emptyLines: [
+            workers.figures.play,
+            [" No commands defined", chalk.gray],
+          ],
+        },
+      ],
+    }),
+  );
 }
 
 const helpOption = Option.create({
