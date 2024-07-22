@@ -1,5 +1,13 @@
 # @vortecx/filegen-cli
 
+## 2.0.2
+
+### Patch Changes
+
+- 5a3a5bd: Switch to async
+- Updated dependencies [5a3a5bd]
+  - @vortecx/cli-forger@0.0.8
+
 ## 2.0.1
 
 ### Patch Changes
