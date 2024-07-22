@@ -1,5 +1,11 @@
 # @vortecx/cli-forger
 
+## 0.0.8
+
+### Patch Changes
+
+- 5a3a5bd: Switch to async
+
 ## 0.0.7
 
 ### Patch Changes
