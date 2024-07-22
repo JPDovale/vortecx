@@ -11,7 +11,7 @@ initCommand.addHandler(async ({ workers }) => {
 
   const initProjectPath = path.getCurrentPath();
 
-  const existsFile = files.exists([initProjectPath, "fgen.ts"]);
+  const existsFile = await files.exists([initProjectPath, "fgen.ts"]);
   if (existsFile) {
     logger.exit.error("Configuration already initialized");
   }
@@ -19,7 +19,7 @@ initCommand.addHandler(async ({ workers }) => {
   const templatesPath = path.getPath([__dirname, "templates"]);
   const isDev = process.env.NODE_ENV === "development";
 
-  templates.save(
+  await templates.save(
     [templatesPath, "fgen.ts.vort"],
     [initProjectPath, "fgen.ts"],
     {

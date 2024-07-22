@@ -22,35 +22,35 @@ moldCommand.addHandler(async ({ workers }) => {
     showInfosLog: false,
   };
 
-  const templateFile = files.read([templateFolder, "template.vort"]);
+  const templateFile = await files.read([templateFolder, "template.vort"]);
   const templateContent = templateFile.get();
 
-  folders.createIfNotExists(fgenFolder, CNEOpts);
+  await folders.createIfNotExists(fgenFolder, CNEOpts);
 
-  const exitentsFolders = folders.getDirectories(fgenFolder);
+  const exitentsFolders = await folders.getDirectories(fgenFolder);
   const foldersToExclude: string[] = [];
 
-  modules.forEach((module) => {
+  for (const module of modules) {
     const name = module.name;
     const types = module.types;
     const typesNames = module.types.map((t) => t.type);
 
-    types.forEach((type) => {
+    for (const type of types) {
       const folderTypePath = path.getPath([fgenFolder, name, type.type]);
-      folders.createIfNotExists(folderTypePath, CNEOpts);
-      files.create([folderTypePath, "index.vort"], templateContent, {
+      await folders.createIfNotExists(folderTypePath, CNEOpts);
+      await files.create([folderTypePath, "index.vort"], templateContent, {
         exitOnExists: false,
       });
-    });
+    }
 
-    const directories = folders.getDirectories([fgenFolder, name]);
+    const directories = await folders.getDirectories([fgenFolder, name]);
 
     directories.forEach((dir) => {
       if (!typesNames.includes(dir)) {
         foldersToExclude.push(path.getPath([fgenFolder, name, dir]));
       }
     });
-  });
+  }
 
   exitentsFolders.forEach((folder) => {
     if (!modulesNames.includes(folder)) {
@@ -58,7 +58,7 @@ moldCommand.addHandler(async ({ workers }) => {
     }
   });
 
-  foldersToExclude.forEach((folder) => folders.del(folder));
+  await Promise.all(foldersToExclude.map((f) => folders.del(f)));
 });
 
 export { moldCommand };

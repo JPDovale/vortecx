@@ -21,7 +21,7 @@ export async function loadConfig(workers: Workers<Extensions>) {
   const projectPath = path.getCurrentPath();
   const configFilePath = path.getPath([projectPath, "fgen.ts"]);
 
-  const existsFile = files.exists(configFilePath);
+  const existsFile = await files.exists(configFilePath);
   if (!existsFile) {
     logger.exit.error(
       "Configuration not initialized",
@@ -29,16 +29,17 @@ export async function loadConfig(workers: Workers<Extensions>) {
     );
   }
 
-  const cf = files.read(configFilePath).get().split("=")[1];
+  const fl = await files.read(configFilePath);
+  const cf = fl.get().split("=")[1];
   const cfjs = `module.exports = ${cf}`;
   const cfjsPath = path.getPath([__dirname, "..", "fgen.js"]);
 
-  const config = files.read(cfjsPath, {
+  const config = await files.read(cfjsPath, {
     exitOnNotExists: false,
   });
 
   config.set(cfjs);
-  config.save();
+  await config.save();
 
   const fgenConfig = await import(cfjsPath)
     .then((v) => v as Config)

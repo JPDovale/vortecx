@@ -13,7 +13,7 @@ generateCommand.addHandler(async ({ workers }) => {
 
   const projectFolder = path.getCurrentPath();
   const fgenFolder = path.getPath([projectFolder, ".vortecx", "fgen"]);
-  const existsFgenFolder = folders.exists(fgenFolder);
+  const existsFgenFolder = await folders.exists(fgenFolder);
 
   if (!existsFgenFolder) {
     logger.exit.error(
@@ -21,7 +21,7 @@ generateCommand.addHandler(async ({ workers }) => {
     );
   }
 
-  const exitentsFolders = folders.getDirectories(fgenFolder);
+  const exitentsFolders = await folders.getDirectories(fgenFolder);
   const config = await extensions.loadConfig();
 
   const { modules } = await prompt
@@ -50,7 +50,7 @@ generateCommand.addHandler(async ({ workers }) => {
   } = {};
 
   for (const module of modules) {
-    const subFolders = folders.getDirectories([fgenFolder, module]);
+    const subFolders = await folders.getDirectories([fgenFolder, module]);
 
     const { types, name } = await prompt
       .ask<{ types: string[]; name: string }>([
@@ -144,8 +144,8 @@ generateCommand.addHandler(async ({ workers }) => {
     });
   });
 
-  generators.forEach((gen) => {
-    const filePopulated = templates.populate(
+  for (const gen of generators) {
+    const filePopulated = await templates.populate(
       [fgenFolder, gen.module, gen.type, "index.vort"],
       gen,
     );
@@ -154,10 +154,10 @@ generateCommand.addHandler(async ({ workers }) => {
     const metadata = header.split("\n");
 
     const folder = metadata
-      .find((meta) => meta.startsWith("folder->"))
+      .find((meta: string) => meta.startsWith("folder->"))
       ?.split("->")[1];
     const filename = metadata
-      .find((meta) => meta.startsWith("filename->"))
+      .find((meta: string) => meta.startsWith("filename->"))
       ?.split("->")[1];
 
     if (!folder || !filename) {
@@ -166,17 +166,17 @@ generateCommand.addHandler(async ({ workers }) => {
       );
     }
 
-    folders.createIfNotExists([projectFolder, folder], {
+    await folders.createIfNotExists([projectFolder, folder], {
       exitOnExists: false,
       showInfosLog: false,
     });
 
-    files.create([projectFolder, folder, filename], content, {
+    await files.create([projectFolder, folder, filename], content, {
       exitOnExists: false,
       updateOnExists: false,
       showInfosLog: true,
     });
-  });
+  }
 });
 
 export { generateCommand };
