@@ -34,7 +34,6 @@
 		"@types/lodash": "^4.17.5",
 		"@types/mustache": "4.2.5",
 		"@types/node": "^20.11.5",
-		"@vortecx/eslint-config": "*",
 		"@vortecx/ts-config": "*",
 		"copyfiles": "^2.4.1",
 		"husky": "^5.1.3",

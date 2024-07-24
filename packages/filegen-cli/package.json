@@ -16,13 +16,7 @@
 		"url": "https://github.com/JPDovale/vortecx/issues"
 	},
 	"homepage": "https://github.com/JPDovale/vortecx",
-	"keywords": [
-		"filegen",
-		"vortecx",
-		"cli",
-		"generator",
-		"file"
-	],
+	"keywords": ["filegen", "vortecx", "cli", "generator", "file"],
 	"author": {
 		"name": "João Paulo do Vale de Oliveira",
 		"email": "joaopaulodovaledeo.60@gmail.com",
@@ -36,7 +30,6 @@
 		"@biomejs/biome": "1.8.3",
 		"@swc/core": "1.7.0-nightly-20240713.1",
 		"@types/node": "20.14.10",
-		"@vortecx/eslint-config": "*",
 		"tsup": "8.1.0",
 		"typescript": "5.5.3"
 	},
