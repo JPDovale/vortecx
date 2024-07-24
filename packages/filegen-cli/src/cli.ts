@@ -1,15 +1,15 @@
 import { CliForger } from "@vortecx/cli-forger";
-import { version, description } from "../package.json";
+import { description, version } from "../package.json";
+import { generateCommand } from "./commands/generate";
 import { initCommand } from "./commands/init";
 import { listModulesCommand } from "./commands/listModules";
-import { extensions, Extensions } from "./extensions";
 import { moldCommand } from "./commands/mold";
-import { generateCommand } from "./commands/generate";
+import { type Extensions, extensions } from "./extensions";
 
 const cli = new CliForger<Extensions>({
-  name: "File generator CLI",
-  version: version,
-  description,
+	name: "File generator CLI",
+	version: version,
+	description,
 });
 
 cli.addExtensions(extensions);

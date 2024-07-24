@@ -1,5 +1,5 @@
-import { cwd } from "process";
+import { cwd } from "node:process";
 
 export function getCurrentPath() {
-  return cwd();
+	return cwd();
 }

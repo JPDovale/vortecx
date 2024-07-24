@@ -8,26 +8,26 @@ import * as ui from "./ui";
 import figures from "./figures";
 
 export type WorkersExtensions<T> = {
-  [K in keyof T]: T[K] extends (arg: any, ...args: infer P) => infer R
-    ? (...args: P) => R
-    : never;
+	[K in keyof T]: T[K] extends (arg: any, ...args: infer P) => infer R
+		? (...args: P) => R
+		: never;
 };
 
 export type Workers<
-  T extends {
-    [x: string]: (args?: any) => any;
-  },
+	T extends {
+		[x: string]: (args?: any) => any;
+	},
 > = typeof workers & {
-  extensions: T;
+	extensions: T;
 };
 
 export const workers = {
-  files,
-  folders,
-  logger,
-  figures,
-  templates,
-  path,
-  prompt,
-  ui,
+	files,
+	folders,
+	logger,
+	figures,
+	templates,
+	path,
+	prompt,
+	ui,
 };

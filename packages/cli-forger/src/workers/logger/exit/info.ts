@@ -1,6 +1,6 @@
-import { workers } from '../../index'
+import { workers } from "../../index";
 
 export function info(...args: unknown[]) {
-  workers.logger.info(...args)
-  process.exit(0)
+	workers.logger.info(...args);
+	process.exit(0);
 }

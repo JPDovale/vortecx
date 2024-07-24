@@ -1,3 +1,3 @@
 export function getColumns() {
-  return process.stdout.columns;
+	return process.stdout.columns;
 }

@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-"use strict";
 
 export { type Config } from "./types";
 

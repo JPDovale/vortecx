@@ -1,10 +1,10 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import { isArray } from "lodash";
-import path from "path";
 
 export async function exists(rawPath: string[] | string) {
-  const rawPaths = isArray(rawPath) ? rawPath : [rawPath];
-  const pathToCheck = path.resolve(...rawPaths);
-  const fileExist = fs.existsSync(pathToCheck);
-  return fileExist;
+	const rawPaths = isArray(rawPath) ? rawPath : [rawPath];
+	const pathToCheck = path.resolve(...rawPaths);
+	const fileExist = fs.existsSync(pathToCheck);
+	return fileExist;
 }

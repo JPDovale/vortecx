@@ -1,3 +1,3 @@
 export function getRows() {
-  return process.stdout.rows;
+	return process.stdout.rows;
 }

@@ -1,46 +1,47 @@
 {
-  "name": "@vortecx/filegen-cli",
-  "version": "2.0.2",
-  "description": "File generator CLI for typescript backend projects",
-  "types": "build/types.d.ts",
-  "main": "index.js",
-  "scripts": {
-    "dev": "yarn clear-build && tsup --watch",
-    "lint": "eslint src/**/*.ts* --fix",
-    "clear-build": "rimraf -rf ./build",
-    "compile": "tsup",
-    "build": "yarn clear-build && yarn compile"
-  },
-  "bugs": {
-    "email": "joaopaulodovaledeo.60@gmail.com",
-    "url": "https://github.com/JPDovale/vortecx/issues"
-  },
-  "homepage": "https://github.com/JPDovale/vortecx",
-  "keywords": [
-    "filegen",
-    "vortecx",
-    "cli",
-    "generator",
-    "file"
-  ],
-  "author": {
-    "name": "João Paulo do Vale de Oliveira",
-    "email": "joaopaulodovaledeo.60@gmail.com",
-    "url": "https://github.com/vortecx/tree/master/packages/filegen#readme"
-  },
-  "license": "MIT",
-  "bin": {
-    "fgen": "build/index.js"
-  },
-  "devDependencies": {
-    "@swc/core": "1.7.0-nightly-20240713.1",
-    "@types/node": "20.14.10",
-    "@vortecx/eslint-config": "*",
-    "tsup": "8.1.0",
-    "typescript": "5.5.3"
-  },
-  "dependencies": {
-    "@vortecx/cli-forger": "*",
-    "lodash": "4.17.21"
-  }
+	"name": "@vortecx/filegen-cli",
+	"version": "2.0.2",
+	"description": "File generator CLI for typescript backend projects",
+	"types": "build/types.d.ts",
+	"main": "index.js",
+	"scripts": {
+		"dev": "yarn clear-build && tsup --watch",
+		"lint": "eslint src/**/*.ts* --fix",
+		"clear-build": "rimraf -rf ./build",
+		"compile": "tsup",
+		"build": "yarn clear-build && yarn compile"
+	},
+	"bugs": {
+		"email": "joaopaulodovaledeo.60@gmail.com",
+		"url": "https://github.com/JPDovale/vortecx/issues"
+	},
+	"homepage": "https://github.com/JPDovale/vortecx",
+	"keywords": [
+		"filegen",
+		"vortecx",
+		"cli",
+		"generator",
+		"file"
+	],
+	"author": {
+		"name": "João Paulo do Vale de Oliveira",
+		"email": "joaopaulodovaledeo.60@gmail.com",
+		"url": "https://github.com/vortecx/tree/master/packages/filegen#readme"
+	},
+	"license": "MIT",
+	"bin": {
+		"fgen": "build/index.js"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.8.3",
+		"@swc/core": "1.7.0-nightly-20240713.1",
+		"@types/node": "20.14.10",
+		"@vortecx/eslint-config": "*",
+		"tsup": "8.1.0",
+		"typescript": "5.5.3"
+	},
+	"dependencies": {
+		"@vortecx/cli-forger": "*",
+		"lodash": "4.17.21"
+	}
 }

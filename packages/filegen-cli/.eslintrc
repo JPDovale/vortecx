@@ -1,5 +1,0 @@
-{
-  "extends": [
-    "@vortecx/eslint-config/node"
-  ]
-}

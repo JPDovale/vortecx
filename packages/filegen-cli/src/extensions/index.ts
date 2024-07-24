@@ -1,12 +1,12 @@
-import { WorkersExtensions } from "@vortecx/cli-forger";
-import { loadConfig } from "./loadConfig";
+import type { WorkersExtensions } from "@vortecx/cli-forger";
 import { capitalizeFirstLetter } from "./capitalizeFirstLetter";
-import { sanetizeString } from "./sanetizeString";
+import { loadConfig } from "./loadConfig";
+import { sanitizeString } from "./sanitizeString";
 
 export const extensions = {
-  loadConfig,
-  sanetizeString,
-  capitalizeFirstLetter,
+	loadConfig,
+	sanitizeString,
+	capitalizeFirstLetter,
 };
 
 export type Extensions = WorkersExtensions<typeof extensions>;
