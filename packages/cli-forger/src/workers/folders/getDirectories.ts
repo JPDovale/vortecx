@@ -2,18 +2,18 @@ import fs from "node:fs/promises";
 import { workers } from "..";
 
 export async function getDirectories(rawPath: string | string[]) {
-	const path = workers.path.getPath(rawPath);
+  const path = workers.path.getPath(rawPath);
 
-	const dirs = await fs.readdir(path);
-	const directories: string[] = [];
+  const dirs = await fs.readdir(path);
+  const directories: string[] = [];
 
-	for (const dir in dirs) {
-		const childPath = workers.path.getPath([path, dir]);
-		const childStas = await fs.stat(childPath);
-		const childIsDirectory = childStas.isDirectory();
+  for (const dir of dirs) {
+    const childPath = workers.path.getPath([path, dir]);
+    const childStas = await fs.stat(childPath);
+    const childIsDirectory = childStas.isDirectory();
 
-		if (childIsDirectory) directories.push(childPath);
-	}
+    if (childIsDirectory) directories.push(childPath);
+  }
 
-	return directories;
+  return directories;
 }

@@ -1,6 +1,6 @@
 {
 	"name": "@vortecx/cli-forger",
-	"version": "0.0.8",
+	"version": "0.1.0",
 	"description": "Make yours cli's easy and fast with samples files",
 	"types": "build/index.d.ts",
 	"main": "build/index.js",
@@ -13,7 +13,12 @@
 		"url": "https://github.com/JPDovale/vortecx/issues"
 	},
 	"homepage": "https://github.com/JPDovale/vortecx",
-	"keywords": ["cli-forger", "cli", "version", "productivity"],
+	"keywords": [
+		"cli-forger",
+		"cli",
+		"version",
+		"productivity"
+	],
 	"scripts": {
 		"dev": "yarn clean-build && tsup --watch",
 		"lint": "eslint src/**/*.ts* --fix",
@@ -22,7 +27,13 @@
 		"build": "yarn clean-build && yarn compile",
 		"prepublishOnly": "yarn build"
 	},
-	"files": ["build", "LICENSE", "readme.md", "docs", "bin"],
+	"files": [
+		"build",
+		"LICENSE",
+		"readme.md",
+		"docs",
+		"bin"
+	],
 	"author": {
 		"name": "João Paulo do Vale de Oliveira",
 		"email": "joaopaulodovaledeo.60@gmail.com",

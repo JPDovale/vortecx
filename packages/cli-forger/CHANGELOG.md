@@ -1,5 +1,11 @@
 # @vortecx/cli-forger
 
+## 0.1.0
+
+### Minor Changes
+
+- Sollving bugs
+
 ## 0.0.8
 
 ### Patch Changes

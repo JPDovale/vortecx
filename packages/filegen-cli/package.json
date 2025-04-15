@@ -1,6 +1,6 @@
 {
 	"name": "@vortecx/filegen-cli",
-	"version": "2.0.2",
+	"version": "2.1.0",
 	"description": "File generator CLI for typescript backend projects",
 	"types": "build/types.d.ts",
 	"main": "index.js",
@@ -16,7 +16,13 @@
 		"url": "https://github.com/JPDovale/vortecx/issues"
 	},
 	"homepage": "https://github.com/JPDovale/vortecx",
-	"keywords": ["filegen", "vortecx", "cli", "generator", "file"],
+	"keywords": [
+		"filegen",
+		"vortecx",
+		"cli",
+		"generator",
+		"file"
+	],
 	"author": {
 		"name": "João Paulo do Vale de Oliveira",
 		"email": "joaopaulodovaledeo.60@gmail.com",

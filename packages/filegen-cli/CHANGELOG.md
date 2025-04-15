@@ -1,5 +1,16 @@
 # @vortecx/filegen-cli
 
+## 2.1.0
+
+### Minor Changes
+
+- Sollving bugs
+
+### Patch Changes
+
+- Updated dependencies
+  - @vortecx/cli-forger@0.1.0
+
 ## 2.0.2
 
 ### Patch Changes
