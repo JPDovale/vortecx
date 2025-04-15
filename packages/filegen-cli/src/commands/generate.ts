@@ -105,7 +105,7 @@ generateCommand.addHandler(async ({ workers }) => {
   const mods = Object.entries(modulesObject);
 
   for (const [k, v] of mods) {
-    const module = config.modules.find((conf) => conf.name === k);
+    const module = config.modules.find((conf) => k.includes(conf.name));
 
     if (!module) {
       logger.exit.error(" Module not found in your configuration file");
@@ -114,7 +114,7 @@ generateCommand.addHandler(async ({ workers }) => {
     const { types, name } = v;
 
     for (const t of types) {
-      const type = module.types.find((ty) => ty.type === t);
+      const type = module.types.find((ty) => t.includes(ty.type));
 
       if (!type) {
         logger.exit.error(" Type not found in your configuration file");

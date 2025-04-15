@@ -1,6 +1,6 @@
 {
 	"name": "@vortecx/filegen-cli",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"description": "File generator CLI for typescript backend projects",
 	"types": "build/types.d.ts",
 	"main": "index.js",
