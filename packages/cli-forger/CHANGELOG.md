@@ -1,5 +1,11 @@
 # @vortecx/cli-forger
 
+## 0.1.2
+
+### Patch Changes
+
+- Add new refines
+
 ## 0.1.1
 
 ### Patch Changes
