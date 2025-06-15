@@ -1,5 +1,11 @@
 # @vortecx/cli-forger
 
+## 0.1.3
+
+### Patch Changes
+
+- Re throw err
+
 ## 0.1.2
 
 ### Patch Changes

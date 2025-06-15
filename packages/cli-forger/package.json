@@ -1,6 +1,6 @@
 {
 	"name": "@vortecx/cli-forger",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "Make yours cli's easy and fast with samples files",
 	"types": "build/index.d.ts",
 	"main": "build/index.js",
