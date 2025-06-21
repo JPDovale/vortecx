@@ -1,5 +1,11 @@
 # @vortecx/cli-forger
 
+## 0.1.4
+
+### Patch Changes
+
+- Update file reading
+
 ## 0.1.3
 
 ### Patch Changes
