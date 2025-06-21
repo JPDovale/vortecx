@@ -3,7 +3,7 @@ import path from "node:path";
 import { cwd } from "node:process";
 import { isArray } from "lodash";
 import { workers } from "../index";
-import { File, FileType } from "./File";
+import { File } from "./File";
 
 interface ReadOptions {
   exitOnNotExists?: boolean;
